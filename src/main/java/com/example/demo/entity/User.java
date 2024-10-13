@@ -24,11 +24,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     @Column(nullable = false)
-    private String name;
+    private String firstName;
+    @Column(nullable = false)
+    private String lastName;
     @Column(nullable = false,unique = true)
     private String email;
     @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
+    private Date created_at;
+    @Column(nullable = false)
+    private Date updated_at;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JsonManagedReference

@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserDTO {
     private int id;
-    private String name;
+    private String firstName;
     private String email;
+    private String password;
+    private String lastName;
 }

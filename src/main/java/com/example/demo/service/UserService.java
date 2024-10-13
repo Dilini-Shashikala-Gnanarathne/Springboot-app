@@ -42,7 +42,8 @@ public class UserService {
         Optional<User> existingUser = userRepository.findById(userDTO.getId());
         if(existingUser.isPresent()){
             User user = existingUser.get();
-            user.setName(userDTO.getName());
+            user.setFirstName(userDTO.getFirstName());
+            user.setLastName(userDTO.getLastName());
             userRepository.save(user);
             return Response.builder()
                     .status(true)

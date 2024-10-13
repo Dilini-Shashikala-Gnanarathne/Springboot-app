@@ -1,18 +1,14 @@
-package com.example.demo.service;
+package com.example.demo.utill;
 
 import com.example.demo.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import jakarta.websocket.Decoder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
-import java.security.Key;
-import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +18,8 @@ import java.util.function.Function;
 @Service
 public class JWTService {
 
+    private final long accessTokenExpiryTime= 60000;
+    private final long refreshTokenExpiryTime= 360000;
     public String extractUsername(String token){
         return extractClaim(token, Claims::getSubject);
     }
@@ -88,6 +86,24 @@ public class JWTService {
             System.err.println(e);
             return null;
         }
+    }
+
+    public String createAccessToken(User user ) {
+        return Jwts.builder()
+                .setSubject(user.getEmail())
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + accessTokenExpiryTime))
+                .signWith(getSignKey())
+                .compact();
+    }
+
+    public String createRefreshToken(User user) {
+        return Jwts.builder()
+                .setSubject(user.getEmail())
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + refreshTokenExpiryTime))
+                .signWith(getSignKey())
+                .compact();
     }
 
     private SecretKey getSignKey() {

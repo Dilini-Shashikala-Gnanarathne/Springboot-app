@@ -1,20 +1,19 @@
-package com.example.demo.config;
+package com.example.demo.utill;
 
 import com.example.demo.entity.User;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
 
 @Data
-public class MyUserDetails implements UserDetails {
+public class UserData implements UserDetails {
     private final User user;
 
-    public MyUserDetails(User user) {
+    public UserData(User user) {
         this.user = user;
     }
 

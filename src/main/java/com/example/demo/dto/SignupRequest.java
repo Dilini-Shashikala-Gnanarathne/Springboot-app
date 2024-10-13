@@ -1,6 +1,7 @@
 package com.example.demo.dto;
 
 import com.example.demo.entity.Role;
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,7 +17,8 @@ import java.util.Set;
 @AllArgsConstructor
 @Component
 public class SignupRequest {
-    private String name;
+    private String firstName;
+    private String lastName;
     private String email;
     private String password;
 }

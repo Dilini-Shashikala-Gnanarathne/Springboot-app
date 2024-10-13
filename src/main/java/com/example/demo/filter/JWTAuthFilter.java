@@ -1,7 +1,7 @@
 package com.example.demo.filter;
 
-import com.example.demo.service.JWTService;
-import com.example.demo.service.MyUserDetailsService;
+import com.example.demo.utill.JWTService;
+import com.example.demo.service.UserDataService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,7 +21,7 @@ public class JWTAuthFilter extends OncePerRequestFilter {
     @Autowired
     private JWTService jwtService;
     @Autowired
-    private MyUserDetailsService userDetailsService;
+    private UserDataService userDetailsService;
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authHeader = request.getHeader("Authorization");
